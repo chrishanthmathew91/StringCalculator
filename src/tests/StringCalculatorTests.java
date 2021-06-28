@@ -76,9 +76,15 @@ public class StringCalculatorTests {
         assertEquals(15, result2);
     }
 
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
+
     @Test
     public void add_InputWithNegativeNumber_ThrowsException() {
 
-        assertThrows("Negatives not allowed", NumberFormatException.class, sc.add("-1"));
+        thrown.expect(NumberFormatException.class);
+        thrown.expectMessage("Negatives not allowed -1");
+        sc.add("-1");
     }
+
 }

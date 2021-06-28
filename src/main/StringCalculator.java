@@ -1,5 +1,7 @@
 package main;
 
+import org.junit.function.ThrowingRunnable;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -13,7 +15,15 @@ public class StringCalculator {
         if (containsLinebreakOrComma(input)) {
             return splitAndAddNumbers(input);
         }
-        return parseInt(input);
+        return parseStringToInt(input);
+    }
+
+    private int parseStringToInt(String input) {
+        int i = parseInt(input);
+        if (i < 0)
+            throw new NumberFormatException("Negatives not allowed " + i);
+        else
+            return  i;
     }
 
     private boolean containsLinebreakOrComma(String input) {
@@ -43,7 +53,7 @@ public class StringCalculator {
         int result = 0;
         String[] numbers = string.split(String.format("%s", delimiter));
         for (String number : numbers)
-            result += parseInt(number);
+            result += parseStringToInt(number);
         return result;
     }
 
