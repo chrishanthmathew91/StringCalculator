@@ -2,9 +2,13 @@ package main;
 
 public class StringCalculator {
 
-    public int add(String s) {
-        if (s.isEmpty())
+    public int add(String number) {
+        if (isEmpty(number))
             return 0;
-        return Integer.parseInt(s);
+        return Integer.parseInt(number);
+    }
+
+    private boolean isEmpty(String s) {
+        return s.isEmpty();
     }
 }
