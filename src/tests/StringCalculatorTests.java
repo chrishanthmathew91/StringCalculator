@@ -93,4 +93,13 @@ public class StringCalculatorTests {
         thrown.expectMessage("Negatives not allowed -1 -2 -3");
         sc.add("-1\n-2,-3");
     }
+
+    @Test
+    public void getCalledCount_ReturnsNumberOfTimesAddIsCalled() {
+
+        sc.add("1");
+        int callCount = sc.getCalledCount();
+
+        assertEquals(callCount, 1);
+    }
 }
