@@ -4,7 +4,6 @@ import main.StringCalculator;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-import org.junit.internal.runners.statements.ExpectException;
 import org.junit.rules.ExpectedException;
 
 import static org.junit.Assert.*;
@@ -94,5 +93,4 @@ public class StringCalculatorTests {
         thrown.expectMessage("Negatives not allowed -1 -2 -3");
         sc.add("-1\n-2,-3");
     }
-
 }

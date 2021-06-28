@@ -11,34 +11,41 @@ import static java.lang.Integer.*;
 
 public class StringCalculator {
 
+    private final List<Integer> integerList = new ArrayList<Integer>();
+
     public int add(String input) {
         if (isEmpty(input))
             return 0;
-        if (containsLinebreakOrComma(input)) {
+
+        if (containsLinebreakOrComma(input))
             return splitAndAddNumbers(input);
-        }
-        int i = parseInt(input);
-        List<Integer> l = new ArrayList<Integer>();
-        l.add(i);
-        return addIntegers(l);
+
+        integerList.add(parseInt(input));
+        return checkForNegativeNumbersOrAdd();
     }
 
-    private int addIntegers(List<Integer> intList) {
-        List<Integer> negativeList = intList.stream().filter(i -> i < 0).toList();
-        if (negativeList.size() > 0) {
-            String message = "Negatives not allowed ";
-            for (int i : negativeList) {
-                message += i;
-                message += " ";
-            }
-           throw new NumberFormatException(message);
-        } else {
-            int result = 0;
-            for (int i : intList)
-                result += i;
-            return result;
-        }
+    private int checkForNegativeNumbersOrAdd() {
+        List<Integer> negativeList = integerList.stream().filter(i -> i < 0).toList();
+        if (negativeList.size() > 0)
+            throwNegativeNumberException(negativeList);
+        return addIntegers();
+    }
 
+    private int addIntegers() {
+        int result = 0;
+        for (int i : integerList)
+            result += i;
+        integerList.clear();
+        return result;
+    }
+
+    private void throwNegativeNumberException(List<Integer> negativeList) {
+        StringBuilder message = new StringBuilder("Negatives not allowed ");
+        for (int i : negativeList) {
+            message.append(i);
+            message.append(" ");
+        }
+        throw new NumberFormatException(message.toString());
     }
 
     private boolean containsLinebreakOrComma(String input) {
@@ -65,11 +72,10 @@ public class StringCalculator {
     }
 
     private int splitByDelimiterAndAdd(String string, String delimiter) {
-        List<Integer> intList = new ArrayList<Integer>();
         String[] numbers = string.split(String.format("%s", delimiter));
         for (String number : numbers)
-            intList.add(parseInt(number));
-        return addIntegers(intList);
+            integerList.add(parseInt(number));
+        return checkForNegativeNumbersOrAdd();
     }
 
     private boolean isEmpty(String s) {
