@@ -14,8 +14,12 @@ public class StringCalculator {
     }
 
     private int splitAndAddNumbers(String input) {
+        int result = 0;
         String[] numbers = input.split(",");
-        return parseInt(numbers[0]) + parseInt(numbers[1]);
+        for (String number : numbers) {
+            result += parseInt(number);
+        }
+        return result;
     }
 
     private boolean isEmpty(String s) {
