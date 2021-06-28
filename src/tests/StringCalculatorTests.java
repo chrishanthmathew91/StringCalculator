@@ -1,5 +1,6 @@
 package tests;
 
+import main.StringCalculator;
 import org.junit.Test;
 
 public class StringCalculatorTests {
