@@ -95,8 +95,7 @@ public class StringCalculator {
     }
 
     private int splitByDelimiterAndAdd(String string, String delimiter) {
-        String delimiterFormat = String.format("%s", delimiter);
-        String[] numbers = string.split(delimiterFormat);
+        String[] numbers = string.split(String.format("%s", delimiter));
         for (String number : numbers) {
             parseIntAndAddToIntegerList(number);
         }
