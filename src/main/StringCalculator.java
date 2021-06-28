@@ -85,7 +85,7 @@ public class StringCalculator {
                     .replace("", "\\");
             return result.substring(0, result.length() - 1);
         }
-        return input;
+        return "\\" + input;
     }
 
     private boolean isDelimiter(String string) {

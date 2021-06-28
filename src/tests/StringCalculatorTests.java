@@ -70,9 +70,11 @@ public class StringCalculatorTests {
 
         int result = sc.add(";\n1;2");
         int result2 = sc.add("-\n1-2-3-4-5");
+        int result3 = sc.add("*\n1*2*3*4*5");
 
         assertEquals(3, result);
         assertEquals(15, result2);
+        assertEquals(15, result3);
     }
 
     @Rule
@@ -126,4 +128,14 @@ public class StringCalculatorTests {
         assertEquals(6, result);
         assertEquals(6, result2);
     }
+
+    @Test
+    public void add_InputWithMultipleDelimiters_ShouldReturnAddedResult() {
+
+        int result = sc.add("[*][%]\n1*2%3");
+
+        assertEquals(6, result);
+    }
+
+
 }
