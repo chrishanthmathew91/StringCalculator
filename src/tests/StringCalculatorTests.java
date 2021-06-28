@@ -62,4 +62,12 @@ public class StringCalculatorTests {
         assertEquals(6, result);
         assertEquals(15, result2);
     }
+
+    @Test
+    public void add_InputWithCustomDelimiter_ReturnsAddedResult() {
+
+        int result = sc.add(";\n1;2");
+
+        assertEquals(3, result);
+    }
 }
