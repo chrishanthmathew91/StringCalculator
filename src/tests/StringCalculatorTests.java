@@ -22,8 +22,10 @@ public class StringCalculatorTests {
 
         int result = sc.add("1");
         int result2 = sc.add("2");
+        int result3 = sc.add("3");
 
         assertEquals(1, result);
         assertEquals(2, result2);
+        assertEquals(3, result3);
     }
 }
