@@ -44,10 +44,12 @@ public class StringCalculatorTests {
     }
 
     @Test
-    public void add_ThreeIntegerString_ReturnsAddedResult() {
+    public void add_MoreThanTwoIntegerString_ReturnsAddedResult() {
 
         int result = sc.add("1,2,3");
+        int result2 = sc.add("1,2,3,4");
 
         assertEquals(6, result);
+        assertEquals(10, result2);
     }
 }
