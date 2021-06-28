@@ -2,6 +2,8 @@ package main;
 
 import org.junit.function.ThrowingRunnable;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -15,15 +17,28 @@ public class StringCalculator {
         if (containsLinebreakOrComma(input)) {
             return splitAndAddNumbers(input);
         }
-        return parseStringToInt(input);
+        int i = parseInt(input);
+        List<Integer> l = new ArrayList<Integer>();
+        l.add(i);
+        return addIntegers(l);
     }
 
-    private int parseStringToInt(String input) {
-        int i = parseInt(input);
-        if (i < 0)
-            throw new NumberFormatException("Negatives not allowed " + i);
-        else
-            return  i;
+    private int addIntegers(List<Integer> intList) {
+        List<Integer> negativeList = intList.stream().filter(i -> i < 0).toList();
+        if (negativeList.size() > 0) {
+            String message = "Negatives not allowed ";
+            for (int i : negativeList) {
+                message += i;
+                message += " ";
+            }
+           throw new NumberFormatException(message);
+        } else {
+            int result = 0;
+            for (int i : intList)
+                result += i;
+            return result;
+        }
+
     }
 
     private boolean containsLinebreakOrComma(String input) {
@@ -50,11 +65,11 @@ public class StringCalculator {
     }
 
     private int splitByDelimiterAndAdd(String string, String delimiter) {
-        int result = 0;
+        List<Integer> intList = new ArrayList<Integer>();
         String[] numbers = string.split(String.format("%s", delimiter));
         for (String number : numbers)
-            result += parseStringToInt(number);
-        return result;
+            intList.add(parseInt(number));
+        return addIntegers(intList);
     }
 
     private boolean isEmpty(String s) {
