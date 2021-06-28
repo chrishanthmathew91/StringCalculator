@@ -15,4 +15,13 @@ public class StringCalculatorTests {
 
         assertEquals(0, result);
     }
+
+    @Test
+    public void add_SingleIntegerString_ReturnsSameInteger() {
+        StringCalculator sc = new StringCalculator();
+
+        int result = sc.add("1");
+
+        assertEquals(1, result);
+    }
 }
