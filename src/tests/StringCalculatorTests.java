@@ -110,8 +110,10 @@ public class StringCalculatorTests {
     public void add_InputWithIntegerLargerThan1000_ShouldReturnAddedResultWithoutThatInteger() {
 
         int result = sc.add("1001,1");
+        int result2 = sc.add("%\n1001%1002%1");
 
         assertEquals(1, result);
+        assertEquals(1, result2);
 
     }
 }

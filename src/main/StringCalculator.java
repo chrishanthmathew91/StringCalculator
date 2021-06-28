@@ -22,12 +22,19 @@ public class StringCalculator {
         if (containsLinebreakOrComma(input))
             return splitAndAddNumbers(input);
 
-        integerList.add(parseInt(input));
+        parseIntAndAddToIntegerList(input);
         return checkForNegativeNumbersOrAdd();
     }
 
     public int getCalledCount() {
         return calledCount;
+    }
+
+    private int checkValidityAndParseInt(String input) {
+        int result = parseInt(input);
+        if (result > 1000)
+            return 0;
+        return result;
     }
 
     private int checkForNegativeNumbersOrAdd() {
@@ -79,9 +86,14 @@ public class StringCalculator {
 
     private int splitByDelimiterAndAdd(String string, String delimiter) {
         String[] numbers = string.split(String.format("%s", delimiter));
-        for (String number : numbers)
-            integerList.add(parseInt(number));
+        for (String number : numbers) {
+            parseIntAndAddToIntegerList(number);
+        }
         return checkForNegativeNumbersOrAdd();
+    }
+
+    private void parseIntAndAddToIntegerList(String number) {
+        integerList.add(checkValidityAndParseInt(number));
     }
 
     private boolean isEmpty(String s) {
