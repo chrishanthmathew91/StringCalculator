@@ -2,7 +2,10 @@ package tests;
 
 import main.StringCalculator;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.internal.runners.statements.ExpectException;
+import org.junit.rules.ExpectedException;
 
 import static org.junit.Assert.*;
 
@@ -71,5 +74,11 @@ public class StringCalculatorTests {
 
         assertEquals(3, result);
         assertEquals(15, result2);
+    }
+
+    @Test
+    public void add_InputWithNegativeNumber_ThrowsException() {
+
+        assertThrows("Negatives not allowed", NumberFormatException.class, sc.add("-1"));
     }
 }
