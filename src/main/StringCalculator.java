@@ -7,7 +7,7 @@ public class StringCalculator {
     public int add(String input) {
         if (isEmpty(input))
             return 0;
-        if (input.contains(",")) {
+        if (input.contains("\n") || input.contains(",")) {
             return splitAndAddNumbers(input);
         }
         return parseInt(input);
@@ -15,7 +15,7 @@ public class StringCalculator {
 
     private int splitAndAddNumbers(String input) {
         int result = 0;
-        String[] numbers = input.split(",");
+        String[] numbers = input.split("[\n,]");
         for (String number : numbers) {
             result += parseInt(number);
         }
