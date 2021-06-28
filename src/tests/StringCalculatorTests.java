@@ -87,4 +87,12 @@ public class StringCalculatorTests {
         sc.add("-1");
     }
 
+    @Test
+    public void add_InputWithMultipleNegativeNumbers_ThrowsNumberFormatExceptionWithMessage() {
+
+        thrown.expect(NumberFormatException.class);
+        thrown.expectMessage("Negatives not allowed -1 -2 -3");
+        sc.add("-1\n-2,-3");
+    }
+
 }
