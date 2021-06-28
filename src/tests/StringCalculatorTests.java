@@ -67,7 +67,9 @@ public class StringCalculatorTests {
     public void add_InputWithCustomDelimiter_ReturnsAddedResult() {
 
         int result = sc.add(";\n1;2");
+        int result2 = sc.add("-\n1-2-3-4-5");
 
         assertEquals(3, result);
+        assertEquals(15, result2);
     }
 }
