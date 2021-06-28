@@ -1,18 +1,25 @@
 package main;
 
+import static java.lang.Integer.*;
+
 public class StringCalculator {
 
-    public int add(String number) {
-        if (isEmpty(number))
+    public int add(String input) {
+        if (isEmpty(input))
             return 0;
-        if (number.contains(",")) {
-            String[] numbers = number.split(",");
-            return Integer.parseInt(numbers[0]) + Integer.parseInt(numbers[1]);
+        if (input.contains(",")) {
+            return splitAndAddNumbers(input);
         }
-        return Integer.parseInt(number);
+        return parseInt(input);
+    }
+
+    private int splitAndAddNumbers(String input) {
+        String[] numbers = input.split(",");
+        return parseInt(numbers[0]) + parseInt(numbers[1]);
     }
 
     private boolean isEmpty(String s) {
         return s.isEmpty();
     }
+
 }
