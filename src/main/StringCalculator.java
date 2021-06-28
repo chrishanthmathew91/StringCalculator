@@ -69,13 +69,23 @@ public class StringCalculator {
         String delimiter = "[\n,]";
         if (input.contains("\n")) {
             String[] parts = input.split("\n", 2);
-            String firstPart = parts[0];
-            if (isDelimiter(firstPart)) {
-                delimiter = firstPart;
+            String cleanedString = checkAndRemoveBraces(parts[0]);
+            if (isDelimiter(cleanedString)) {
+                delimiter = cleanedString;
                 input = parts[1];
             }
         }
         return splitByDelimiterAndAdd(input, delimiter);
+    }
+
+    private String checkAndRemoveBraces(String input) {
+        if (input.contains("[")) {
+            String result = input.replace("[", "")
+                    .replace("]", "")
+                    .replace("", "\\");
+            return result.substring(0, result.length() - 1);
+        }
+        return input;
     }
 
     private boolean isDelimiter(String string) {
@@ -85,7 +95,8 @@ public class StringCalculator {
     }
 
     private int splitByDelimiterAndAdd(String string, String delimiter) {
-        String[] numbers = string.split(String.format("%s", delimiter));
+        String delimiterFormat = String.format("%s", delimiter);
+        String[] numbers = string.split(delimiterFormat);
         for (String number : numbers) {
             parseIntAndAddToIntegerList(number);
         }

@@ -120,8 +120,10 @@ public class StringCalculatorTests {
     @Test
     public void add_InputWithMultiLengthDelimiter_ShouldReturnAddedResult() {
 
-        int resutl = sc.add("[**]\n1**2**3");
+        int result = sc.add("[**]\n1**2**3");
+        int result2 = sc.add("[&&&]\n1&&&2&&&3");
 
-        assertEquals(6, resutl);
+        assertEquals(6, result);
+        assertEquals(6, result2);
     }
 }
