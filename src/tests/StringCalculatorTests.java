@@ -80,7 +80,7 @@ public class StringCalculatorTests {
     public ExpectedException thrown = ExpectedException.none();
 
     @Test
-    public void add_InputWithNegativeNumber_ThrowsException() {
+    public void add_InputWithSingleNegativeNumber_ThrowsException() {
 
         thrown.expect(NumberFormatException.class);
         thrown.expectMessage("Negatives not allowed -1");
