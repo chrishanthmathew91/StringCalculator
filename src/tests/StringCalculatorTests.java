@@ -34,4 +34,12 @@ public class StringCalculatorTests {
         assertEquals(2, result2);
         assertEquals(3, result3);
     }
+
+    @Test
+    public void add_TwoIntegerString_ReturnsAddedResult() {
+
+        int result = sc.add("1,2");
+
+        assertEquals(3, result);
+    }
 }
