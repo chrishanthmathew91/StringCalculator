@@ -24,6 +24,10 @@ public class StringCalculator {
         return checkForNegativeNumbersOrAdd();
     }
 
+    public int getCalledCount() {
+        return 0;
+    }
+
     private int checkForNegativeNumbersOrAdd() {
         List<Integer> negativeList = integerList.stream().filter(i -> i < 0).toList();
         if (negativeList.size() > 0)
@@ -81,5 +85,4 @@ public class StringCalculator {
     private boolean isEmpty(String s) {
         return s.isEmpty();
     }
-
 }
