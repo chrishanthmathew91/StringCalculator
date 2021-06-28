@@ -57,7 +57,9 @@ public class StringCalculatorTests {
     public void add_InputWithLineBreakAndComma_ReturnsAddedResult() {
 
         int result = sc.add("1\n2,3");
+        int result2 = sc.add("1,2\n3,4\n5");
 
         assertEquals(6, result);
+        assertEquals(15, result2);
     }
 }
