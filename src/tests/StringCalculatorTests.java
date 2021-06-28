@@ -21,7 +21,9 @@ public class StringCalculatorTests {
         StringCalculator sc = new StringCalculator();
 
         int result = sc.add("1");
+        int result2 = sc.add("2");
 
         assertEquals(1, result);
+        assertEquals(2, result2);
     }
 }
