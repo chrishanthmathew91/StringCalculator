@@ -52,4 +52,12 @@ public class StringCalculatorTests {
         assertEquals(6, result);
         assertEquals(10, result2);
     }
+
+    @Test
+    public void add_InputWithLineBreakAndComma_ReturnsAddedResult() {
+
+        int result = sc.add("1\n2,3");
+
+        assertEquals(6, result);
+    }
 }
