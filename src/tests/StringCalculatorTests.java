@@ -116,4 +116,12 @@ public class StringCalculatorTests {
         assertEquals(1, result2);
 
     }
+
+    @Test
+    public void add_InputWithMultiLengthDelimiter_ShouldReturnAddedResult() {
+
+        int resutl = sc.add("[**]\n1**2**3");
+
+        assertEquals(6, resutl);
+    }
 }
