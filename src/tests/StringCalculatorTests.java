@@ -105,4 +105,13 @@ public class StringCalculatorTests {
 
         assertEquals(3, callCount);
     }
+
+    @Test
+    public void add_InputWithIntegerLargerThan1000_ShouldReturnAddedResultWithoutThatInteger() {
+
+        int result = sc.add("1001,1");
+
+        assertEquals(1, result);
+
+    }
 }
