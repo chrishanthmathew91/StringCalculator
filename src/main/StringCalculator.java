@@ -12,8 +12,10 @@ import static java.lang.Integer.*;
 public class StringCalculator {
 
     private final List<Integer> integerList = new ArrayList<Integer>();
+    private int calledCount = 0;
 
     public int add(String input) {
+        calledCount++;
         if (isEmpty(input))
             return 0;
 
@@ -25,7 +27,7 @@ public class StringCalculator {
     }
 
     public int getCalledCount() {
-        return 0;
+        return calledCount;
     }
 
     private int checkForNegativeNumbersOrAdd() {

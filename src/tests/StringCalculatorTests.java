@@ -98,8 +98,11 @@ public class StringCalculatorTests {
     public void getCalledCount_ReturnsNumberOfTimesAddIsCalled() {
 
         sc.add("1");
+        sc.add("-\n1-2-3-4-5");
+        sc.add("1,2\n3,4\n5");
+
         int callCount = sc.getCalledCount();
 
-        assertEquals(callCount, 1);
+        assertEquals(3, callCount);
     }
 }
