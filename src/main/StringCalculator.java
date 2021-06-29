@@ -3,6 +3,7 @@ package main;
 import org.junit.function.ThrowingRunnable;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -30,11 +31,19 @@ public class StringCalculator {
         return calledCount;
     }
 
+    private boolean containsLinebreakOrComma(String input) {
+        return input.contains("\n") || input.contains(",");
+    }
+
     private int checkValidityAndParseInt(String input) {
         int result = parseInt(input);
         if (result > 1000)
             return 0;
         return result;
+    }
+
+    private void parseIntAndAddToIntegerList(String number) {
+        integerList.add(checkValidityAndParseInt(number));
     }
 
     private int checkForNegativeNumbersOrAdd() {
@@ -61,31 +70,37 @@ public class StringCalculator {
         throw new NumberFormatException(message.toString());
     }
 
-    private boolean containsLinebreakOrComma(String input) {
-        return input.contains("\n") || input.contains(",");
-    }
-
     private int splitAndAddNumbers(String input) {
-        String delimiter = "[\n,]";
+        List<String> delimiters = new ArrayList<String>();
+        delimiters.add("[\n,]");
         if (input.contains("\n")) {
             String[] parts = input.split("\n", 2);
-            String cleanedString = checkAndRemoveBraces(parts[0]);
-            if (isDelimiter(cleanedString)) {
-                delimiter = cleanedString;
+            String first = parts[0];
+            if (!isDelimiter(first)) {
+                delimiters.clear();
+                delimiters.add("[\n,]");
+            } else {
+                delimiters = checkAndRemoveBraces(first);
                 input = parts[1];
             }
         }
-        return splitByDelimiterAndAdd(input, delimiter);
+        return splitByDelimiterAndAdd(input, delimiters);
     }
 
-    private String checkAndRemoveBraces(String input) {
+    private List<String> checkAndRemoveBraces(String input) {
+        List<String> delimiters = new ArrayList<String>();
         if (input.contains("[")) {
-            String result = input.replace("[", "")
-                    .replace("]", "")
-                    .replace("", "\\");
-            return result.substring(0, result.length() - 1);
+            String[] parts = input.split("]\\[");
+            for (String d : parts) {
+                String result = d.replace("[", "")
+                        .replace("]", "")
+                        .replace("", "\\");
+                delimiters.add(result.substring(0, result.length() - 1));
+            }
+            return delimiters;
         }
-        return "\\" + input;
+        delimiters.add("\\" + input);
+        return delimiters;
     }
 
     private boolean isDelimiter(String string) {
@@ -94,16 +109,26 @@ public class StringCalculator {
         return !m.find();
     }
 
-    private int splitByDelimiterAndAdd(String string, String delimiter) {
-        String[] numbers = string.split(String.format("%s", delimiter));
+    private int splitByDelimiterAndAdd(String string, List<String> delimiters) {
+        List<String> numbers;
+        String cleanString = string;
+        if (delimiters.size() == 1) {
+            numbers = splitByDelimiter(string, delimiters.get(0));
+        } else {
+            for (String d : delimiters) {
+                String delim = d.replace("\\", "");
+                cleanString = cleanString.replace(delim, ",");
+            }
+            numbers = splitByDelimiter(cleanString, ",");
+        }
         for (String number : numbers) {
             parseIntAndAddToIntegerList(number);
         }
         return checkForNegativeNumbersOrAdd();
     }
 
-    private void parseIntAndAddToIntegerList(String number) {
-        integerList.add(checkValidityAndParseInt(number));
+    private List<String> splitByDelimiter(String string, String delimiter) {
+        return Arrays.stream(string.split(String.format("%s", delimiter))).toList();
     }
 
     private boolean isEmpty(String s) {
