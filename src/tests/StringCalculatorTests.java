@@ -138,4 +138,11 @@ public class StringCalculatorTests {
     }
 
 
+    @Test
+    public void add_InputWithMultipleDelimitersWithMultipleChars_ShouldReturnAddedResult() {
+
+        int result = sc.add("[***][%%%]\n1***2%%%3");
+
+        assertEquals(6, result);
+    }
 }
